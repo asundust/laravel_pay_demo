@@ -11,6 +11,8 @@ return array(
     'AdminPermissionSeeder' => $baseDir . '/database/seeds/AdminPermissionSeeder.php',
     'AdminRoleSeeder' => $baseDir . '/database/seeds/AdminRoleSeeder.php',
     'App\\Admin\\Actions\\DemoOrder\\RowRefund' => $baseDir . '/app/Admin/Actions/DemoOrder/RowRefund.php',
+    'App\\Admin\\Actions\\DemoOrder\\RowRefundClose' => $baseDir . '/app/Admin/Actions/DemoOrder/RowRefundClose.php',
+    'App\\Admin\\Actions\\DemoOrder\\RowRefundResend' => $baseDir . '/app/Admin/Actions/DemoOrder/RowRefundResend.php',
     'App\\Admin\\Controllers\\AuthController' => $baseDir . '/app/Admin/Controllers/AuthController.php',
     'App\\Admin\\Controllers\\ConfigController' => $baseDir . '/app/Admin/Controllers/ConfigController.php',
     'App\\Admin\\Controllers\\DemoOrderController' => $baseDir . '/app/Admin/Controllers/DemoOrderController.php',

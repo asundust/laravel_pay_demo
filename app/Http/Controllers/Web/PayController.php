@@ -35,7 +35,7 @@ class PayController extends Controller
         $money = $request->input('money');
         $payWay = $request->input('pay_way');
 
-        if (strlen($money) == 0) {
+        if (strlen($money) == 0 || !is_numeric($money)) {
             if ($request->ajax()) {
                 throw new Exception('请输入金额');
             } else {

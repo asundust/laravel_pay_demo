@@ -660,6 +660,8 @@ class ComposerStaticInita0ef333b8be16317a15e74eb82803542
         'AdminPermissionSeeder' => __DIR__ . '/../..' . '/database/seeds/AdminPermissionSeeder.php',
         'AdminRoleSeeder' => __DIR__ . '/../..' . '/database/seeds/AdminRoleSeeder.php',
         'App\\Admin\\Actions\\DemoOrder\\RowRefund' => __DIR__ . '/../..' . '/app/Admin/Actions/DemoOrder/RowRefund.php',
+        'App\\Admin\\Actions\\DemoOrder\\RowRefundClose' => __DIR__ . '/../..' . '/app/Admin/Actions/DemoOrder/RowRefundClose.php',
+        'App\\Admin\\Actions\\DemoOrder\\RowRefundResend' => __DIR__ . '/../..' . '/app/Admin/Actions/DemoOrder/RowRefundResend.php',
         'App\\Admin\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Admin/Controllers/AuthController.php',
         'App\\Admin\\Controllers\\ConfigController' => __DIR__ . '/../..' . '/app/Admin/Controllers/ConfigController.php',
         'App\\Admin\\Controllers\\DemoOrderController' => __DIR__ . '/../..' . '/app/Admin/Controllers/DemoOrderController.php',

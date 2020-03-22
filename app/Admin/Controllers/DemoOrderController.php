@@ -3,6 +3,8 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Actions\DemoOrder\RowRefund;
+use App\Admin\Actions\DemoOrder\RowRefundClose;
+use App\Admin\Actions\DemoOrder\RowRefundResend;
 use App\Models\Pay\DemoOrder;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -80,6 +82,10 @@ class DemoOrderController extends AdminController
             $actions->disableDelete();
             if ($this->row->billed) {
                 $actions->add(new RowRefund());
+                if ($this->row->refunding_amount > 0) {
+                    $actions->add(new RowRefundResend());
+                    $actions->add(new RowRefundClose());
+                }
             }
         });
 
