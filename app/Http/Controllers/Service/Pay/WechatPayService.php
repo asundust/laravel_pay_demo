@@ -195,7 +195,7 @@ class WechatPayService
             DB::rollBack();
             return '';
         } catch (Exception $e) {
-            pl('微信回调失败：' . $e->getMessage(), 'wechat-notify', 'pay');
+            pl('微信回调失败：' . $e->getMessage(), 'wechat-notify-refund', 'pay');
             DB::rollBack();
             return '';
         }
