@@ -2,7 +2,7 @@
 
 本项目是基于`本地化(中文化)项目模板`的一个简单收款和管理[Demo](https://pay.leeay.com/pay)，带有前台`/pay`和后台`/admin/orders`，由于限制，仅有部分支付功能
                  
-同步[github.com](https://github.com/asundust/laravel_pay_demo)和[gitee.com](https://gitee.com/asundust/laravel_pay_demo))
+同步[github.com](https://github.com/asundust/laravel_pay_demo)和[gitee.com](https://gitee.com/asundust/laravel_pay_demo)
 
 ## 关于`本地化(中文化)项目模板`
 
