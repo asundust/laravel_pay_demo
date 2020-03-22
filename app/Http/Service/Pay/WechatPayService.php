@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Service\Pay;
+namespace App\Http\Service\Pay;
 
 use App\Models\Pay\MultiBill;
 use App\Models\Pay\MultiRefundBill;

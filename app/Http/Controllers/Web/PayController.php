@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Service\Pay\AlipayService;
-use App\Http\Controllers\Service\Pay\WechatPayService;
+use App\Http\Service\Pay\AlipayService;
+use App\Http\Service\Pay\WechatPayService;
 use App\Models\Pay\DemoOrder;
 use Exception;
 use Illuminate\Http\Request;
