@@ -4,6 +4,8 @@
                  
 同步[github.com](https://github.com/asundust/laravel_pay_demo)和[gitee.com](https://gitee.com/asundust/laravel_pay_demo)
 
+关于`Composer源`的声明：由于连接性的问题故使用的是`阿里云Composer源`(本地全局更改，非项目更改)，故产生的`composer.lock`文件会有`阿里云Composer源`的链接。
+
 ## 关于`本地化(中文化)项目模板`
 
 [Laravel](https://github.com/laravel/laravel)本地化(中文化)项目模板，带[Laravel-Admin](https://github.com/z-song/laravel-admin)、[Config](https://github.com/laravel-admin-extensions/config)、一键安装/更新，已安装[dingo/api](https://github.com/dingo/api)扩展包以及部分其他辅助扩展包，目前[Laravel](https://github.com/laravel/laravel)版本是6.x版本。
