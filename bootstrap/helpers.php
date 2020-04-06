@@ -343,3 +343,34 @@ if (!function_exists('admin_to_label')) {
         return $data;
     }
 }
+
+if (!function_exists('sc_send')) {
+    /**
+     * Server酱推送
+     *
+     * @param $text
+     * @param string $desc
+     * @param string $key
+     * @return bool|false|string
+     */
+    function sc_send($text, $desc = '', $key = '')
+    {
+        if (!$key) {
+            $key = config('sc_send_key');
+        }
+        if (!$key) {
+            return false;
+        }
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => 'Content-type: application/x-www-form-urlencoded',
+                'content' => http_build_query([
+                    'text' => $text,
+                    'desp' => $desc
+                ])
+            ]
+        ]);
+        return $result = file_get_contents('https://sc.ftqq.com/' . $key . '.send', false, $context);
+    }
+}

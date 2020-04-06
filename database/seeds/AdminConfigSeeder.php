@@ -11,6 +11,11 @@ class AdminConfigSeeder extends Seeder
             'name' => 'force_https',
             'value' => '0',
         ],
+        [
+            'description' => 'Server酱推送密钥(请关注“方糖”公众号)',
+            'name' => 'sc_send_key',
+            'value' => '',
+        ],
     ];
 
     /**
