@@ -123,7 +123,6 @@
                         count++;
                     },
                     error(res) {
-                        alert(count);
                         if (res.responseJSON.message) {
                             toastr.error(res.responseJSON.message);
                             return false;

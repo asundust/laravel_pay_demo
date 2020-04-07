@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\DemoOrder\RowPayStatusCheck;
 use App\Admin\Actions\DemoOrder\RowRefund;
 use App\Admin\Actions\DemoOrder\RowRefundClose;
 use App\Admin\Actions\DemoOrder\RowRefundResend;
@@ -50,10 +51,10 @@ class DemoOrderController extends AdminController
         $grid->column('pay_info', '支付信息')->display(function () {
             $str = '';
             if ($this->billed) {
-                $str .= '支付￥' . money_show($this->payed_amount);
+                $str .= '已付￥' . money_show($this->payed_amount);
             }
             if ($this->refunded_amount > 0 || $this->refunding_amount > 0) {
-                $str .= '/已退款￥' . money_show($this->refunded_amount) . '/退款中￥' . money_show($this->refunding_amount);
+                $str .= '/已退￥' . money_show($this->refunded_amount) . '/在退￥' . money_show($this->refunding_amount);
             }
             return $str;
         });
@@ -85,6 +86,11 @@ class DemoOrderController extends AdminController
                 if ($this->row->refunding_amount > 0) {
                     $actions->add(new RowRefundResend());
                     $actions->add(new RowRefundClose());
+                }
+            }
+            if ($this->row->bill) {
+                if ($this->row->bill->bill_status == 0 || $this->row->bill->pay_status == 1) {
+                    $actions->add(new RowPayStatusCheck());
                 }
             }
         });

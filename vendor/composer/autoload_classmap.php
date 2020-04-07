@@ -10,6 +10,7 @@ return array(
     'AdminMenusSeeder' => $baseDir . '/database/seeds/AdminMenusSeeder.php',
     'AdminPermissionSeeder' => $baseDir . '/database/seeds/AdminPermissionSeeder.php',
     'AdminRoleSeeder' => $baseDir . '/database/seeds/AdminRoleSeeder.php',
+    'App\\Admin\\Actions\\DemoOrder\\RowPayStatusCheck' => $baseDir . '/app/Admin/Actions/DemoOrder/RowPayStatusCheck.php',
     'App\\Admin\\Actions\\DemoOrder\\RowRefund' => $baseDir . '/app/Admin/Actions/DemoOrder/RowRefund.php',
     'App\\Admin\\Actions\\DemoOrder\\RowRefundClose' => $baseDir . '/app/Admin/Actions/DemoOrder/RowRefundClose.php',
     'App\\Admin\\Actions\\DemoOrder\\RowRefundResend' => $baseDir . '/app/Admin/Actions/DemoOrder/RowRefundResend.php',
