@@ -48,6 +48,12 @@
             font-size: 84px;
         }
 
+        .ad-title {
+            font-size: 30px;
+            margin-top: 50px;
+            margin-bottom: 10px;
+        }
+
         .links > a {
             color: #636b6f;
             padding: 0 25px;
@@ -100,14 +106,16 @@
         </div>
 
         <div class="links">
-            <a href="https://laravel.com/docs">Docs</a>
-            <a href="https://laracasts.com">Laracasts</a>
-            <a href="https://laravel-news.com">News</a>
-            <a href="https://blog.laravel.com">Blog</a>
-            <a href="https://nova.laravel.com">Nova</a>
-            <a href="https://forge.laravel.com">Forge</a>
-            <a href="https://vapor.laravel.com">Vapor</a>
-            <a href="https://github.com/laravel/laravel">GitHub</a>
+            <a href="https://github.com/asundust/laravel_new">基于项目</a>
+            <a href="https://github.com/asundust/laravel_pay_demo">开源地址</a>
+            <a href="https://github.com/asundust">作者GITHUB</a>
+        </div>
+        <div class="ad-title">
+            以下为推广
+        </div>
+        <div class="links">
+            <a href="http://youqian.360.cn/register.html?id=87098">加入360推广</a>
+            <a href="https://hao.360.cn/?src=lm&ls=n286efe0291">360导航</a>
         </div>
     </div>
 </div>
