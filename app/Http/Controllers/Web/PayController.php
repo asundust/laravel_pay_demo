@@ -129,7 +129,7 @@ class PayController extends Controller
                 'msg' => '支付成功',
                 'data' => [
                     'wait' => 0,
-                    'url' => route('web.pay_result', ['id' => $order->id]),
+                    'url' => $order->payResultUrl(),
                 ]
             ];
         }
