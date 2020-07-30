@@ -15,6 +15,7 @@ class RowRefundResend extends RowAction
         foreach ($refundBills as $refundBill) {
             $result = $order->billed->toRefundResend($refundBill);
         }
+
         return $this->response()->success('已发起再次退款申请')->refresh();
     }
 }
