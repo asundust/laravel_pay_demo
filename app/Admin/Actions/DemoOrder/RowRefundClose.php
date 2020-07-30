@@ -12,6 +12,7 @@ class RowRefundClose extends RowAction
     public function handle(DemoOrder $order)
     {
         $order->billed->refundBills()->where('refund_status', 1)->update(['refund_status' => 4]);
+
         return $this->response()->success('已关闭退款中的退款订单')->refresh();
     }
 

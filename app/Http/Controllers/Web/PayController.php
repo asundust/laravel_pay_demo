@@ -14,7 +14,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class PayController extends Controller
 {
     /**
-     * 支付页面
+     * 支付页面.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -24,10 +24,10 @@ class PayController extends Controller
     }
 
     /**
-     * 去支付
+     * 去支付.
      *
-     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|mixed
+     *
      * @throws Exception
      */
     public function toPay(Request $request)
@@ -35,7 +35,7 @@ class PayController extends Controller
         $money = $request->input('money');
         $payWay = $request->input('pay_way');
 
-        if (strlen($money) == 0 || !is_numeric($money)) {
+        if (0 == strlen($money) || !is_numeric($money)) {
             if ($request->ajax()) {
                 throw new Exception('请输入金额');
             } else {
@@ -43,7 +43,7 @@ class PayController extends Controller
             }
         }
 
-        if (is_wechat() && $payWay == 2) {
+        if (is_wechat() && 2 == $payWay) {
             if ($request->ajax()) {
                 throw new Exception('请使用第三方浏览器进行支付');
             } else {
@@ -72,20 +72,22 @@ class PayController extends Controller
         switch ($payWay) {
             case 1:
                 $result = (new WechatPayService())->pay($payData, 'scan');
-                if ($result['trade_type'] == 'NATIVE') {
+                if ('NATIVE' == $result['trade_type']) {
                     $base64 = base64_encode(QrCode::format('png')
                         ->size(200)
                         ->margin(0)
                         ->generate($result['code_url']));
+
                     return [
                         'code' => 0,
                         'msg' => '',
                         'data' => [
                             'id' => $order->id,
                             'img' => 'data:image/png;base64,' . $base64,
-                        ]
+                        ],
                     ];
                 }
+
                 return ['code' => 1, 'msg' => '下单失败，请重试'];
                 break;
 
@@ -104,9 +106,8 @@ class PayController extends Controller
     }
 
     /**
-     * 检查支付
+     * 检查支付.
      *
-     * @param Request $request
      * @return array
      */
     public function checkPay(Request $request)
@@ -120,33 +121,33 @@ class PayController extends Controller
                 'data' => [
                     'wait' => 0,
                     'url' => route('home'),
-                ]
+                ],
             ];
         }
-        if ($order->status == 1 && !empty($order->pay_at)) {
+        if (1 == $order->status && !empty($order->pay_at)) {
             return [
                 'code' => 0,
                 'msg' => '支付成功',
                 'data' => [
                     'wait' => 0,
                     'url' => $order->payResultUrl(),
-                ]
+                ],
             ];
         }
+
         return [
             'code' => 1,
             'msg' => '',
             'data' => [
                 'wait' => 1,
                 'url' => '',
-            ]
+            ],
         ];
     }
 
     /**
-     * 支付结果页
+     * 支付结果页.
      *
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function payResult(Request $request)
@@ -156,12 +157,14 @@ class PayController extends Controller
             abort(404);
         }
         $order = DemoOrder::with(['bill'])->where('id', $id)->where('created_at', '>=', now()->subDay())->firstOrFail();
-        if ($order->status == 1) {
+        if (1 == $order->status) {
             if (Cache::missing('DemoOrder' . $id)) {
                 abort(404);
             }
+
             return view('web.pay.pay_success', compact('order'));
         }
+
         return view('web.pay.pay_fail', compact('order'));
     }
 }

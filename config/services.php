@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -50,7 +49,6 @@ return [
             'uri' => '',
             'permission' => '',
             'roles' => [
-
             ],
             'data' => [
                 [
@@ -60,10 +58,9 @@ return [
                     'uri' => 'config',
                     'permission' => '',
                     'roles' => [
-
                     ],
                 ],
-            ]
+            ],
         ],
         [
             'title' => '订单管理',
@@ -72,11 +69,9 @@ return [
             'uri' => 'orders',
             'permission' => '',
             'roles' => [
-
             ],
             'data' => [
-
-            ]
+            ],
         ],
     ],
     // Admin后台权限

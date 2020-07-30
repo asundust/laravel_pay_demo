@@ -56,6 +56,7 @@ class DemoOrderController extends AdminController
             if ($this->refunded_amount > 0 || $this->refunding_amount > 0) {
                 $str .= '/已退￥' . money_show($this->refunded_amount) . '/在退￥' . money_show($this->refunding_amount);
             }
+
             return $str;
         });
         $grid->column('created_at', '创建时间');
@@ -89,7 +90,7 @@ class DemoOrderController extends AdminController
                 }
             }
             if ($this->row->bill) {
-                if ($this->row->bill->bill_status == 0 || $this->row->bill->pay_status == 1) {
+                if (0 == $this->row->bill->bill_status || 1 == $this->row->bill->pay_status) {
                     $actions->add(new RowPayStatusCheck());
                 }
             }
@@ -98,6 +99,7 @@ class DemoOrderController extends AdminController
         $grid->disableCreateButton();
         $grid->disableBatchActions();
         $grid->disableExport();
+
         return $grid;
     }
 
@@ -105,6 +107,7 @@ class DemoOrderController extends AdminController
      * Make a show builder.
      *
      * @param mixed $id
+     *
      * @return Show
      */
     protected function detail($id)

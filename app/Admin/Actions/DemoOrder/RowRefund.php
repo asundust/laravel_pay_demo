@@ -18,9 +18,10 @@ class RowRefund extends RowAction
         // }
 
         $result = $order->billed->toRefund($refundAmount);
-        if ($result['code'] == 0) {
+        if (0 == $result['code']) {
             return $this->response()->success($result['msg'])->refresh();
         }
+
         return $this->response()->error($result['msg']);
     }
 

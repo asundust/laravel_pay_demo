@@ -12,9 +12,10 @@ class RowPayStatusCheck extends RowAction
     public function handle(DemoOrder $order)
     {
         $result = $order->bill->toPayFind();
-        if ($result['code'] == 0) {
+        if (0 == $result['code']) {
             return $this->response()->success($result['msg'])->refresh();
         }
+
         return $this->response()->error($result['msg']);
     }
 }
