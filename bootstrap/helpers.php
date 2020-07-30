@@ -1,53 +1,5 @@
 <?php
 
-if (!function_exists('curl_get_url')) {
-    /**
-     * CURL_GET
-     *
-     * @param $url
-     * @return bool|mixed|string
-     */
-    function curl_get_url($url)
-    {
-        $curl = curl_init();
-        $timeout = 5;
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
-        $file_contents = curl_exec($curl);
-        curl_close($curl);
-        return $file_contents;
-    }
-}
-
-if (!function_exists('curl_post_url')) {
-    /**
-     * CURL_POST
-     *
-     * @param $url
-     * @param array $data
-     * @param array $httpHeader
-     * @return mixed
-     */
-    function curl_post_url($url, $data = [], $httpHeader = [])
-    {
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $httpHeader);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_NOBODY, true);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-        $return_str = curl_exec($curl);
-        curl_close($curl);
-        return $return_str;
-    }
-}
-
 if (!function_exists('log_channel')) {
     /**
      * 返回指定通道的日志实例
@@ -66,11 +18,11 @@ if (!function_exists('pl')) {
      * 快速日志打印
      *
      * @param string $message 日志信息
-     * @param string $name 日志文件名
-     * @param string $path 日志写入路径
-     * @param int $max 该目录下最大日志文件数
+     * @param string $name    日志文件名
+     * @param string $path    日志写入路径
+     * @param int    $max     该目录下最大日志文件数
      */
-    function pl($message = '', $name = 'test', $path = '', $max = 30)
+    function pl($message = '', $name = 'test', $path = '', $max = 14)
     {
         if (strlen($path) == 0) {
             $path = $name;
@@ -80,21 +32,23 @@ if (!function_exists('pl')) {
                 'driver' => 'daily',
                 'path' => storage_path('logs/' . $path . '/' . $name . '.log'),
                 'level' => 'debug',
+                'days' => $max,
             ],
         ]);
         $type = '';
         if (function_exists('debug_backtrace') && debug_backtrace()) {
-            $first = Illuminate\Support\Arr::first(debug_backtrace());
+            $first = Arr::first(debug_backtrace());
             if (is_array($first) && isset($first['file']) && isset($first['line'])) {
                 $str = substr(str_replace(base_path(), '', $first['file']), 1);
-                $type = "On {$first['line']} Line At [{$str}] " . PHP_EOL;
+                $type = "{$str}:{$first['line']}";
             }
         }
         if (!is_array($message)) {
-            $type = $type . $message;
-            $message = [];
+            logger()->channel($path . '_' . $name)->info($type . PHP_EOL . $message);
+        } else {
+            logger()->channel($path . '_' . $name)->info($type);
+            logger()->channel($path . '_' . $name)->info($message);
         }
-        log_channel($path . '_' . $name)->info($type, $message);
     }
 }
 
@@ -103,8 +57,8 @@ if (!function_exists('api_res')) {
      * 封装返回数据
      *
      * @param string $msg
-     * @param array $data
-     * @param int $code
+     * @param array  $data
+     * @param int    $code
      *
      * @return array
      */
@@ -118,8 +72,8 @@ if (!function_exists('api_ok')) {
     /**
      * 封装返回数据-成功
      * @param string|array $msg
-     * @param array|int $data
-     * @param int $code
+     * @param array|int    $data
+     * @param int          $code
      *
      * @return array
      */
@@ -194,48 +148,11 @@ if (!function_exists('mad')) {
     }
 }
 
-if (!function_exists('is_time_string')) {
-    /**
-     * 判断字符串是否为时间格式
-     *
-     * @param string $var
-     * @return bool
-     */
-    function is_time_string($var)
-    {
-        if (!is_string($var)) {
-            return false;
-        }
-        $time = strtotime($var);
-        return date('Y-m-d', $time) == $var || date('Y-m-d H:i:s', $time) == $var;
-    }
-}
-
-if (!function_exists('admin_switch_arr')) {
-    /**
-     * admin系统的switch选项
-     *
-     * @param $arr
-     * @param bool $isOpposite
-     * @return array
-     */
-    function admin_switch_arr($arr, $isOpposite = true)
-    {
-        $keys = array_keys($arr);
-        $key1 = $isOpposite ? 1 : 0;
-        $key2 = $isOpposite ? 0 : 1;
-        return [
-            'on' => ['value' => $keys[$key1], 'text' => $arr[$keys[$key1]], 'color' => 'success'],
-            'off' => ['value' => $keys[$key2], 'text' => $arr[$keys[$key2]], 'color' => 'danger'],
-        ];
-    }
-}
-
 if (!function_exists('console_line')) {
     /**
      * 命令行模式中, 打印需要的数据
      *
-     * @param $text
+     * @param        $text
      * @param string $type
      */
     function console_line($text, $type = 'line')
@@ -290,7 +207,7 @@ if (!function_exists('sc_send')) {
     /**
      * Server酱推送
      *
-     * @param $text
+     * @param        $text
      * @param string $desc
      * @param string $key
      * @return bool|false|string
@@ -317,6 +234,26 @@ if (!function_exists('sc_send')) {
     }
 }
 
+if (!function_exists('admin_switch_arr')) {
+    /**
+     * admin系统的switch选项
+     *
+     * @param      $arr
+     * @param bool $isOpposite
+     * @return array
+     */
+    function admin_switch_arr($arr, $isOpposite = true)
+    {
+        $keys = array_keys($arr);
+        $key1 = $isOpposite ? 1 : 0;
+        $key2 = $isOpposite ? 0 : 1;
+        return [
+            'on' => ['value' => $keys[$key1], 'text' => $arr[$keys[$key1]], 'color' => 'success'],
+            'off' => ['value' => $keys[$key2], 'text' => $arr[$keys[$key2]], 'color' => 'danger'],
+        ];
+    }
+}
+
 if (!function_exists('is_wechat')) {
     /**
      * 判断是否是微信访问
@@ -331,29 +268,19 @@ if (!function_exists('is_wechat')) {
 
 if (!function_exists('money_show')) {
     /**
-     * 金额显示处理
+     * 金额格式化
      *
-     * @param object|string|array $money
-     * @return string|array
+     * @param int|string $money  金额数
+     * @param int        $number 小数位数
+     *
+     * @return string
      */
-    function money_show($money)
+    function money_show($money, $number = 2)
     {
-        if (is_array($money)) {
-            foreach ($money as $k => $v) {
-                $money[$k] = money_show($v);
-            }
-            return $money;
-        }
         if ($money == null || $money == '') {
             return '0.00';
         }
-
-        if (is_object($money)) {
-            $result = $money;
-        } else {
-            $result = \Brick\Math\BigDecimal::of($money);
-        }
-        return sprintf('%01.2f', $result->getIntegralPart() . '.' . $result->getFractionalPart());
+        return sprintf('%01.' . $number . 'f', $money);
     }
 }
 
