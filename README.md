@@ -1,3 +1,5 @@
+![StyleCI build status](https://github.styleci.io/repos/249097655/shield) 
+
 ## 关于
 
 本项目是基于`本地化(中文化)项目模板`的一个简单收款和管理[Demo](https://pay.leeay.com/pay)，带有前台`/pay`和后台`/admin/orders`，由于限制，仅有部分支付功能
