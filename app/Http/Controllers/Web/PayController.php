@@ -54,7 +54,7 @@ class PayController extends Controller
         $order = DemoOrder::create([
             'user_id' => 0,
             'price' => $money,
-            'title' => '账户充值：￥' . money_show($money),
+            'title' => '账户充值：￥'.money_show($money),
             'status' => 0,
         ]);
         $bill = $order->bills()->create([
@@ -83,7 +83,7 @@ class PayController extends Controller
                         'msg' => '',
                         'data' => [
                             'id' => $order->id,
-                            'img' => 'data:image/png;base64,' . $base64,
+                            'img' => 'data:image/png;base64,'.$base64,
                         ],
                     ];
                 }
@@ -158,7 +158,7 @@ class PayController extends Controller
         }
         $order = DemoOrder::with(['bill'])->where('id', $id)->where('created_at', '>=', now()->subDay())->firstOrFail();
         if (1 == $order->status) {
-            if (Cache::missing('DemoOrder' . $id)) {
+            if (Cache::missing('DemoOrder'.$id)) {
                 abort(404);
             }
 

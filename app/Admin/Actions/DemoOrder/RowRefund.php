@@ -31,7 +31,7 @@ class RowRefund extends RowAction
         $this->text('refunding_amount', '退款中金额')->default(money_show($this->row->refunding_amount))->disable();
         $this->text('can_refund_amount', '可退款金额')->default(money_show($this->row->can_refund_amount))->disable();
         $this->text('refund_amount', '退款金额')->default(money_show($this->row->can_refund_amount))
-            ->rules('required|numeric|min:0.01|max:' . $this->row->can_refund_amount)
+            ->rules('required|numeric|min:0.01|max:'.$this->row->can_refund_amount)
             ->autofocus();
     }
 }
