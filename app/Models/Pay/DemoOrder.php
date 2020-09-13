@@ -4,43 +4,47 @@ namespace App\Models\Pay;
 
 use App\Models\BaseModel;
 use App\Models\BaseModelTrait;
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 
 /**
  * App\Models\Pay\DemoOrder.
  *
- * @property int                                                                  $id
- * @property int                                                                  $user_id           用户id
- * @property string                                                               $number            订单号
- * @property string                                                               $title             订单名称
- * @property float                                                                $price             价格
- * @property string|null                                                          $pay_at            支付时间
- * @property int                                                                  $status            状态(0未付款，1已付款)
- * @property \Illuminate\Support\Carbon|null                                      $created_at
- * @property \Illuminate\Support\Carbon|null                                      $updated_at
- * @property \App\Models\Pay\MultiBill                                            $bill
- * @property \App\Models\Pay\MultiBill                                            $billed
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Pay\MultiBill[] $bills
- * @property int|null                                                             $bills_count
- * @property mixed                                                                $can_refund_amount
- * @property mixed                                                                $payed_amount
- * @property mixed                                                                $refunded_amount
- * @property mixed                                                                $refunding_amount
- * @property mixed                                                                $status_name
+ * @property int                    $id
+ * @property int                    $user_id           用户id
+ * @property string                 $number            订单号
+ * @property string                 $title             订单名称
+ * @property float                  $price             价格
+ * @property string|null            $pay_at            支付时间
+ * @property int                    $status            状态(0未付款，1已付款)
+ * @property Carbon|null            $created_at
+ * @property Carbon|null            $updated_at
+ * @property MultiBill              $bill
+ * @property MultiBill              $billed
+ * @property Collection|MultiBill[] $bills
+ * @property int|null               $bills_count
+ * @property mixed                  $can_refund_amount
+ * @property mixed                  $payed_amount
+ * @property mixed                  $refunded_amount
+ * @property mixed                  $refunding_amount
+ * @property mixed                  $status_name
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pay\DemoOrder newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pay\DemoOrder newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pay\DemoOrder query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pay\DemoOrder whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pay\DemoOrder whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pay\DemoOrder whereNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pay\DemoOrder wherePayAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pay\DemoOrder wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pay\DemoOrder whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pay\DemoOrder whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pay\DemoOrder whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Pay\DemoOrder whereUserId($value)
- * @mixin \Eloquent
+ * @method static Builder|DemoOrder newModelQuery()
+ * @method static Builder|DemoOrder newQuery()
+ * @method static Builder|DemoOrder query()
+ * @method static Builder|DemoOrder whereCreatedAt($value)
+ * @method static Builder|DemoOrder whereId($value)
+ * @method static Builder|DemoOrder whereNumber($value)
+ * @method static Builder|DemoOrder wherePayAt($value)
+ * @method static Builder|DemoOrder wherePrice($value)
+ * @method static Builder|DemoOrder whereStatus($value)
+ * @method static Builder|DemoOrder whereTitle($value)
+ * @method static Builder|DemoOrder whereUpdatedAt($value)
+ * @method static Builder|DemoOrder whereUserId($value)
+ * @mixin Eloquent
  */
 class DemoOrder extends BaseModel
 {
@@ -51,13 +55,6 @@ class DemoOrder extends BaseModel
         1 => '已支付',
         2 => '部分退款',
         3 => '全额退款',
-    ];
-
-    const STATUS_LABEL = [
-        0 => 'default',
-        1 => 'success',
-        2 => 'warning',
-        3 => 'danger',
     ];
 
     protected static function boot()
