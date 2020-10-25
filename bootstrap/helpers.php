@@ -154,7 +154,7 @@ if (!function_exists('console_line')) {
     /**
      * 命令行模式中, 打印需要的数据.
      *
-     * @param        $text
+     * @param $text
      * @param string $type
      */
     function console_line($text, $type = 'line')
@@ -213,7 +213,7 @@ if (!function_exists('sc_send')) {
      * @param string $desc
      * @param string $key
      *
-     * @return bool|false|string
+     * @return false|\Psr\Http\Message\ResponseInterface
      */
     function sc_send($text, $desc = '', $key = '')
     {
@@ -223,18 +223,22 @@ if (!function_exists('sc_send')) {
         if (!$key) {
             return false;
         }
-        $context = stream_context_create([
-            'http' => [
-                'method' => 'POST',
-                'header' => 'Content-type: application/x-www-form-urlencoded',
-                'content' => http_build_query([
-                    'text' => $text,
-                    'desp' => $desc,
-                ]),
+
+        $response = (new \GuzzleHttp\Client([
+            'timeout' => 5,
+            'verify' => false,
+            'http_errors' => false,
+            'headers' => [
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ],
+        ]))->post('https://sc.ftqq.com/'.$key.'.send', [
+            'form_params' => [
+                'text' => $text,
+                'desp' => $desc,
             ],
         ]);
 
-        return $result = file_get_contents('https://sc.ftqq.com/'.$key.'.send', false, $context);
+        return json_decode($response->getBody()->getContents(), true);
     }
 }
 
@@ -242,7 +246,7 @@ if (!function_exists('admin_switch_arr')) {
     /**
      * admin系统的switch选项.
      *
-     * @param      $arr
+     * @param $arr
      * @param bool $isOpposite
      *
      * @return array

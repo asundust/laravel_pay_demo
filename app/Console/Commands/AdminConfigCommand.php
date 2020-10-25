@@ -50,8 +50,29 @@ class AdminConfigCommand extends Command
                 }
                 console_comment('　　　　处理完成'.PHP_EOL);
                 break;
+            case 'delete':
+                console_info('后台删除配置开始处理');
+                $configIds = [];
+                foreach ($adminConfigData as $key => $v) {
+                    $config = AdminConfig::where('name', $v['name'])->first();
+                    if ($config) {
+                        $configIds[] = $config->id;
+                    }
+                }
+                $configs = AdminConfig::whereNotIn('id', $configIds)->get();
+                $count = $configs->count();
+                if (0 == $count) {
+                    console_comment('　　　　处理完成：无将要删除的配置'.PHP_EOL);
+                } else {
+                    foreach ($configs as $config) {
+                        console_info('　　正在删除：'.$config->id.' '.$config->name.' ['.$config->description.']'.' ，配置值为：'.$config->value);
+                        $config->delete();
+                    }
+                    console_comment('　　　　处理完成：共删除配置'.$count.'个'.PHP_EOL);
+                }
+                break;
             default:
-                console_error('只允许type参数类型为“new”');
+                console_error('只允许type参数类型为“new”、“delete”');
                 break;
         }
     }

@@ -222,7 +222,7 @@ class MultiBill extends BaseModel
     {
         $bill = MultiBill::where('pay_no', $payNo)->first();
         if (!$bill) {
-            abort('404', '订单不翼而飞了 :(');
+            abort(503, '订单不翼而飞了 :(');
         }
 
         if (method_exists($bill->billable, 'payResult')) {

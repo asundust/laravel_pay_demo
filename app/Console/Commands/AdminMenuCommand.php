@@ -126,12 +126,12 @@ class AdminMenuCommand extends Command
                     'uri' => $uriParent,
                     'permission' => $parentValue['permission'],
                 ]);
-                if (count($parentValue['roles'])) {
+                if (count($parentValue['roles'] ?? [])) {
                     $menuParent->roles()->sync(Role::whereIn('slug', $parentValue['roles'])->pluck('id')->toArray());
                 }
             }
 
-            foreach ($parentValue['data'] as $k => $v) {
+            foreach ($parentValue['data'] ?? [] as $k => $v) {
                 $uriChild = $this->getUri($v);
                 console_info('　　　　子菜单：'.$v['title'].' '.$uriChild);
                 $menuChild = $menu->where('parent_id', $menuParent->id)
@@ -147,7 +147,7 @@ class AdminMenuCommand extends Command
                         'uri' => $uriChild,
                         'permission' => $v['permission'],
                     ]);
-                    if (count($v['roles'])) {
+                    if (count($v['roles'] ?? [])) {
                         $menuChild->roles()->sync(Role::whereIn('slug', $v['roles'])->pluck('id')->toArray());
                     }
                 }
