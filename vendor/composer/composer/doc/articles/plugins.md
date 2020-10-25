@@ -94,6 +94,10 @@ and have it return an array. The array key must be the
 [event name](https://getcomposer.org/doc/articles/scripts.md#event-names)
 and the value is the name of the method in this class to be called.
 
+> **Note:** If you don't know which event to listen to, you can run a Composer
+> command with the COMPOSER_DEBUG_EVENTS=1 environment variable set, which might
+> help you identify what event you are looking for.
+
 ```php
 public static function getSubscribedEvents()
 {
@@ -161,6 +165,14 @@ class AwsPlugin implements PluginInterface, EventSubscriberInterface
         $this->io = $io;
     }
 
+    public function deactivate(Composer $composer, IOInterface $io)
+    {
+    }
+
+    public function uninstall(Composer $composer, IOInterface $io)
+    {
+    }
+
     public static function getSubscribedEvents()
     {
         return array(
@@ -175,9 +187,7 @@ class AwsPlugin implements PluginInterface, EventSubscriberInterface
         $protocol = parse_url($event->getProcessedUrl(), PHP_URL_SCHEME);
 
         if ($protocol === 's3') {
-            $awsClient = new AwsClient($this->io, $this->composer->getConfig());
-            $s3RemoteFilesystem = new S3RemoteFilesystem($this->io, $event->getRemoteFilesystem()->getOptions(), $awsClient);
-            $event->setRemoteFilesystem($s3RemoteFilesystem);
+            // ...
         }
     }
 }
@@ -223,7 +233,7 @@ class Plugin implements PluginInterface, Capable
 ### Command provider
 
 The [`Composer\Plugin\Capability\CommandProvider`][9] capability allows to register
-additional commands for Composer :
+additional commands for Composer:
 
 ```php
 <?php
@@ -263,7 +273,7 @@ Now the `custom-plugin-command` is available alongside Composer commands.
 
 ## Running plugins manually
 
-Plugins for an event can be run manually by the `run-script` command. This works the same way as 
+Plugins for an event can be run manually by the `run-script` command. This works the same way as
 [running scripts manually](scripts.md#running-scripts-manually).
 
 ## Using Plugins
@@ -278,6 +288,12 @@ local project plugins are loaded.
 > installed plugins. This may be particularly helpful if any of the plugins
 > causes errors and you wish to update or uninstall it.
 
+## Plugin Helpers
+
+As of Composer 2, due to the fact that DownloaderInterface can sometimes return Promises
+and have been split up in more steps than they used to, we provide a [SyncHelper][11]
+to make downloading and installing packages easier.
+
 [1]: ../04-schema.md#type
 [2]: ../04-schema.md#extra
 [3]: https://github.com/composer/composer/blob/master/src/Composer/Plugin/PluginInterface.php
@@ -288,3 +304,4 @@ local project plugins are loaded.
 [8]: https://github.com/composer/composer/blob/master/src/Composer/Plugin/Capable.php
 [9]: https://github.com/composer/composer/blob/master/src/Composer/Plugin/Capability/CommandProvider.php
 [10]: https://symfony.com/doc/current/components/console.html
+[11]: https://github.com/composer/composer/blob/master/src/Composer/Util/SyncHelper.php

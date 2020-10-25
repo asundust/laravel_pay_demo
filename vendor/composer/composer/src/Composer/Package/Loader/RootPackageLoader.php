@@ -47,19 +47,13 @@ class RootPackageLoader extends ArrayLoader
      */
     private $versionGuesser;
 
-    /**
-     * @var IOInterface
-     */
-    private $io;
-
     public function __construct(RepositoryManager $manager, Config $config, VersionParser $parser = null, VersionGuesser $versionGuesser = null, IOInterface $io = null)
     {
         parent::__construct($parser);
 
         $this->manager = $manager;
         $this->config = $config;
-        $this->versionGuesser = $versionGuesser ?: new VersionGuesser($config, new ProcessExecutor(), $this->versionParser);
-        $this->io = $io;
+        $this->versionGuesser = $versionGuesser ?: new VersionGuesser($config, new ProcessExecutor($io), $this->versionParser);
     }
 
     /**
@@ -72,17 +66,17 @@ class RootPackageLoader extends ArrayLoader
     {
         if (!isset($config['name'])) {
             $config['name'] = '__root__';
-        } elseif ($this->io) {
-            if ($err = ValidatingArrayLoader::hasPackageNamingError($config['name'])) {
-                $this->io->writeError('<warning>Deprecation warning: Your package name '.$err.' Make sure you fix this as Composer 2.0 will error.</warning>');
-            }
+        } elseif ($err = ValidatingArrayLoader::hasPackageNamingError($config['name'])) {
+            throw new \RuntimeException('Your package name '.$err);
         }
         $autoVersioned = false;
         if (!isset($config['version'])) {
             $commit = null;
 
-            // override with env var if available
-            if (getenv('COMPOSER_ROOT_VERSION')) {
+            if (isset($config['extra']['branch-version'])) {
+                $config['version'] = preg_replace('{(\.x)?(-dev)?$}', '', $config['extra']['branch-version']).'.x-dev';
+            } elseif (getenv('COMPOSER_ROOT_VERSION')) {
+                // override with env var if available
                 $config['version'] = getenv('COMPOSER_ROOT_VERSION');
             } else {
                 $versionData = $this->versionGuesser->guessVersion($config, $cwd ?: getcwd());
@@ -147,13 +141,11 @@ class RootPackageLoader extends ArrayLoader
             }
         }
 
-        if ($this->io) {
-            foreach (array_keys(BasePackage::$supportedLinkTypes) as $linkType) {
-                if (isset($config[$linkType])) {
-                    foreach ($config[$linkType] as $linkName => $constraint) {
-                        if ($err = ValidatingArrayLoader::hasPackageNamingError($linkName, true)) {
-                            $this->io->writeError('<warning>Deprecation warning: '.$linkType.'.'.$err.' Make sure you fix this as Composer 2.0 will error.</warning>');
-                        }
+        foreach (array_keys(BasePackage::$supportedLinkTypes) as $linkType) {
+            if (isset($config[$linkType])) {
+                foreach ($config[$linkType] as $linkName => $constraint) {
+                    if ($err = ValidatingArrayLoader::hasPackageNamingError($linkName, true)) {
+                        throw new \RuntimeException($linkType.'.'.$err);
                     }
                 }
             }
