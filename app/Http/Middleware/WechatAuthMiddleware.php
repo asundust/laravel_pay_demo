@@ -14,10 +14,9 @@ class WechatAuthMiddleware extends OAuthAuthenticate
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
      * @param string                   $account
      * @param string|null              $scope
-     * @param string|null              $type : service(服务号), subscription(订阅号), work(企业微信)
+     * @param string|null              $type    : service(服务号), subscription(订阅号), work(企业微信)
      *
      * @return mixed
      */
@@ -44,6 +43,7 @@ class WechatAuthMiddleware extends OAuthAuthenticate
         da(Session::has($sessionKey));
         if (Session::has($sessionKey)) {
             event(new WeChatUserAuthorized(session($sessionKey), false, $account));
+
             return $next($request);
         }
 
