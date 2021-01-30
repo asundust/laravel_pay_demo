@@ -23,7 +23,6 @@ class PayController extends Controller
      */
     public function pay()
     {
-        dd($this->getWechatUser());
         return view('web.pay.pay');
     }
 

@@ -41,7 +41,6 @@ class WechatAuthMiddleware extends OAuthAuthenticate
             $scope = array_map('trim', explode(',', $scope));
         }
 
-        da(Session::has($sessionKey));
         if (Session::has($sessionKey)) {
             event(new WeChatUserAuthorized(session($sessionKey), false, $account));
             return $next($request);
