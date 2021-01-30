@@ -28,7 +28,7 @@ Route::any('notify/wechat', 'NotifyController@notifyWechat'); // 异步通知 - 
 Route::any('notify/wechat_refund', 'NotifyController@notifyWechatRefund'); // 异步通知 - 微信 - 退款
 
 // 临时支付
-Route::get('pay', 'Web\PayController@pay')->name('web.pay'); // 付款页面
+Route::get('pay', 'Web\PayController@pay')->name('web.pay')->middleware(['wechat.oauth:default,snsapi_base']); // 付款页面
 Route::post('pay', 'Web\PayController@toPay')->name('web.to_pay'); // 充值请求
 Route::post('money_check_pay', 'Web\PayController@checkPay')->name('web.check_pay'); // 充值检查 - 微信
 Route::get('pay_result', 'Web\PayController@payResult')->name('web.pay_result'); // 充值结果
