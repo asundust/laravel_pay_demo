@@ -17,7 +17,7 @@ class WechatAuthMiddleware extends OAuthAuthenticate
      * @param \Illuminate\Http\Request $request
      * @param string                   $account
      * @param string|null              $scope
-     * @param string|null              $type : service(服务号), subscription(订阅号), work(企业微信)
+     * @param string|null              $type    : service(服务号), subscription(订阅号), work(企业微信)
      *
      * @return mixed
      */
