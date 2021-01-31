@@ -13,8 +13,6 @@ trait WechatTrait
      */
     public function getWechatUser()
     {
-        $wechatOpenid = session('wechat.oauth_user.default', [])['id'];
-
-        return WechatUser::where('wechat_openid', $wechatOpenid)->first();
+        return session(WechatUser::SESSION_KEY);
     }
 }

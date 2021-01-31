@@ -24,4 +24,5 @@ use Illuminate\Support\Carbon;
  */
 class WechatUser extends BaseModel
 {
+    const SESSION_KEY = 'wechat_user';
 }

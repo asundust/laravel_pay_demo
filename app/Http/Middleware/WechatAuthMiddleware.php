@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Wechat\WechatUser;
 use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Session;
@@ -16,7 +17,7 @@ class WechatAuthMiddleware extends OAuthAuthenticate
      * @param \Illuminate\Http\Request $request
      * @param string                   $account
      * @param string|null              $scope
-     * @param string|null              $type    : service(服务号), subscription(订阅号), work(企业微信)
+     * @param string|null              $type : service(服务号), subscription(订阅号), work(企业微信)
      *
      * @return mixed
      */
@@ -40,7 +41,7 @@ class WechatAuthMiddleware extends OAuthAuthenticate
             $scope = array_map('trim', explode(',', $scope));
         }
 
-        if (Session::has($sessionKey)) {
+        if (Session::has($sessionKey) && Session::get(WechatUser::SESSION_KEY)) {
             event(new WeChatUserAuthorized(session($sessionKey), false, $account));
 
             return $next($request);
@@ -58,6 +59,7 @@ class WechatAuthMiddleware extends OAuthAuthenticate
         }
 
         session()->forget($sessionKey);
+        session()->forget(WechatUser::SESSION_KEY);
 
         // 跳转到微信授权页
         return redirect()->away(
