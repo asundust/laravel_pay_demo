@@ -19,7 +19,7 @@ class WechatAuthMiddleware extends OAuthAuthenticate
      * @param \Illuminate\Http\Request $request
      * @param string                   $account
      * @param string|null              $scope
-     * @param string|null              $type : service(服务号), subscription(订阅号), work(企业微信)
+     * @param string|null              $type    : service(服务号), subscription(订阅号), work(企业微信)
      *
      * @return mixed
      */
@@ -60,7 +60,7 @@ class WechatAuthMiddleware extends OAuthAuthenticate
             if (!$wechatUser) {
                 $user = User::create([
                     'name' => $oauthUser->getName() ?? $oauthUser->getId(),
-                    'email' => $oauthUser->getId() . '@qq.com',
+                    'email' => $oauthUser->getId().'@qq.com',
                     'password' => Hash::make($oauthUser->getId()),
                 ]);
                 $wechatUser = WechatUser::create([
