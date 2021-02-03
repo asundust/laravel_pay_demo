@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // 测试
-Route::get('t/{name?}', 'Tests\TestController@test');
+Route::get('t/{action?}', 'Tests\TestController@t');
 
 // 主页
 Route::get('/', function () {

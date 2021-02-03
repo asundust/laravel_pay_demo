@@ -16,16 +16,16 @@ class TestController extends Controller
         }
     }
 
-    public function test($name = '')
+    public function t($action = '')
     {
-        if (0 == strlen($name)) {
-            $name = 'a';
+        if (0 == strlen($action)) {
+            $action = 'a';
         }
-        $result = $this->$name();
+        $result = $this->$action();
         if (!empty($result)) {
             return $result;
         }
-        dd('结束运行方法：'.$name);
+        dd('结束运行方法：'.$action);
     }
 
     // public function a()

@@ -29,9 +29,9 @@ if (!function_exists('pl')) {
             $path = $name;
         }
         config([
-            'logging.channels.'.$path.'_'.$name => [
+            'logging.channels.' . $path . '_' . $name => [
                 'driver' => 'daily',
-                'path' => storage_path('logs/'.$path.'/'.$name.'.log'),
+                'path' => storage_path('logs/' . $path . '/' . $name . '.log'),
                 'level' => 'debug',
                 'days' => $max,
             ],
@@ -45,10 +45,10 @@ if (!function_exists('pl')) {
             }
         }
         if (!is_array($message)) {
-            logger()->channel($path.'_'.$name)->info($type.PHP_EOL.$message);
+            logger()->channel($path . '_' . $name)->info($type . PHP_EOL . $message);
         } else {
-            logger()->channel($path.'_'.$name)->info($type);
-            logger()->channel($path.'_'.$name)->info($message);
+            logger()->channel($path . '_' . $name)->info($type);
+            logger()->channel($path . '_' . $name)->info($message);
         }
     }
 }
@@ -154,7 +154,7 @@ if (!function_exists('console_line')) {
     /**
      * 命令行模式中, 打印需要的数据.
      *
-     * @param $text
+     * @param        $text
      * @param string $type
      */
     function console_line($text, $type = 'line')
@@ -165,7 +165,7 @@ if (!function_exists('console_line')) {
             ];
             $code = $types[$type] ?? '37';
             // 30黑色，31红色，32绿色，33黄色，34蓝色，35洋红，36青色，37白色，
-            echo chr(27).'['.$code.'m'."$text".chr(27).'[0m'.PHP_EOL;
+            echo chr(27) . '[' . $code . 'm' . "$text" . chr(27) . '[0m' . PHP_EOL;
         }
     }
 }
@@ -231,7 +231,7 @@ if (!function_exists('sc_send')) {
             'headers' => [
                 'Content-Type' => 'application/x-www-form-urlencoded',
             ],
-        ]))->post('https://sc.ftqq.com/'.$key.'.send', [
+        ]))->post('https://sc.ftqq.com/' . $key . '.send', [
             'form_params' => [
                 'text' => $text,
                 'desp' => $desc,
@@ -246,7 +246,7 @@ if (!function_exists('admin_switch_arr')) {
     /**
      * admin系统的switch选项.
      *
-     * @param $arr
+     * @param      $arr
      * @param bool $isOpposite
      *
      * @return array
@@ -261,18 +261,6 @@ if (!function_exists('admin_switch_arr')) {
             'on' => ['value' => $keys[$key1], 'text' => $arr[$keys[$key1]], 'color' => 'success'],
             'off' => ['value' => $keys[$key2], 'text' => $arr[$keys[$key2]], 'color' => 'danger'],
         ];
-    }
-}
-
-if (!function_exists('is_wechat')) {
-    /**
-     * 判断是否是微信访问.
-     *
-     * @return bool
-     */
-    function is_wechat()
-    {
-        return false !== strpos(\Jenssegers\Agent\Facades\Agent::getUserAgent(), 'MicroMessenger');
     }
 }
 
@@ -291,7 +279,19 @@ if (!function_exists('money_show')) {
             return '0.00';
         }
 
-        return sprintf('%01.'.$number.'f', $money);
+        return sprintf('%01.' . $number . 'f', $money);
+    }
+}
+
+if (!function_exists('is_wechat')) {
+    /**
+     * 判断是否是微信访问.
+     *
+     * @return bool
+     */
+    function is_wechat()
+    {
+        return false !== strpos(\Jenssegers\Agent\Facades\Agent::getUserAgent(), 'MicroMessenger');
     }
 }
 
