@@ -8,8 +8,6 @@ trait WechatTrait
 {
     /**
      * 获取微信用户信息.
-     *
-     * @return WechatUser|null
      */
     public function getWechatUser(): ?WechatUser
     {
