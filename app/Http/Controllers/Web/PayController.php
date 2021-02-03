@@ -54,10 +54,17 @@ class PayController extends Controller
             }
         }
 
+        $userId = 0;
+        $wechatDrive = 'scan';
+        if (is_wechat() && $this->getWechatUser()) {
+            $userId = $this->getWechatUser()->user_id;
+            $wechatDrive = 'mp';
+        }
+
         $order = DemoOrder::create([
-            'user_id' => 0,
+            'user_id' => $userId,
             'price' => $money,
-            'title' => '账户充值：￥'.money_show($money),
+            'title' => '账户充值：￥' . money_show($money),
             'status' => 0,
         ]);
         $bill = $order->bills()->create([
@@ -74,24 +81,41 @@ class PayController extends Controller
 
         switch ($payWay) {
             case 1:
-                $result = (new WechatPayService())->pay($payData, 'scan');
-                if ('NATIVE' == $result['trade_type']) {
-                    $base64 = base64_encode(QrCode::format('png')
-                        ->size(200)
-                        ->margin(0)
-                        ->generate($result['code_url']));
-
-                    return [
-                        'code' => 0,
-                        'msg' => '',
-                        'data' => [
-                            'id' => $order->id,
-                            'img' => 'data:image/png;base64,'.$base64,
-                        ],
-                    ];
+                if (is_wechat() && $this->getWechatUser()) {
+                    $payData['openid'] = $this->getWechatUser()->wechat_openid;
                 }
+                $result = (new WechatPayService())->pay($payData, $wechatDrive);
+                switch ($wechatDrive) {
+                    case 'mp':
+                        return [
+                            'code' => 0,
+                            'msg' => '',
+                            'data' => [
+                                'type' => 'mp',
+                                'id' => $order->id,
+                                'config' => $result,
+                            ]
+                        ];
+                        break;
+                    case 'scan':
+                        $base64 = base64_encode(QrCode::format('png')
+                            ->size(200)
+                            ->margin(0)
+                            ->generate($result['code_url']));
 
-                return ['code' => 1, 'msg' => '下单失败，请重试'];
+                        return [
+                            'code' => 0,
+                            'msg' => '',
+                            'data' => [
+                                'id' => $order->id,
+                                'img' => 'data:image/png;base64,' . $base64,
+                            ],
+                        ];
+                        break;
+                    default:
+                        return ['code' => 1, 'msg' => '下单失败，请重试'];
+                        break;
+                }
                 break;
 
             case 2:
@@ -161,7 +185,7 @@ class PayController extends Controller
         }
         $order = DemoOrder::with(['bill'])->where('id', $id)->where('created_at', '>=', now()->subDay())->firstOrFail();
         if (1 == $order->status) {
-            if (Cache::missing('DemoOrder'.$id)) {
+            if (Cache::missing('DemoOrder' . $id)) {
                 abort(404);
             }
 
