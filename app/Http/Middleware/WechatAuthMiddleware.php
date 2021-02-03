@@ -2,11 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User\User;
 use App\Models\Wechat\WechatUser;
 use Closure;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Overtrue\LaravelWeChat\Events\WeChatUserAuthorized;
 use Overtrue\LaravelWeChat\Middleware\OAuthAuthenticate;
@@ -53,25 +51,7 @@ class WechatAuthMiddleware extends OAuthAuthenticate
         $enforceHttps = Arr::get($config, 'oauth.enforce_https', false);
 
         if ($request->has('code')) {
-            $oauthUser = $officialAccount->oauth->user();
-            session([$sessionKey => $oauthUser]);
-
-            $wechatUser = WechatUser::where('wechat_openid', $oauthUser->getId())->first();
-            if (!$wechatUser) {
-                $user = User::create([
-                    'name' => $oauthUser->getName() ?? $oauthUser->getId(),
-                    'email' => $oauthUser->getId() . '@qq.com',
-                    'password' => Hash::make($oauthUser->getId()),
-                ]);
-                $wechatUser = WechatUser::create([
-                    'user_id' => $user->id,
-                    'wechat_openid' => $oauthUser->getId(),
-                    'name' => $oauthUser->getName(),
-                    'nickname' => $oauthUser->getNickname(),
-                    'avatar' => $oauthUser->getAvatar(),
-                ]);
-            }
-            Session::put(WechatUser::SESSION_KEY, $wechatUser);
+            session([$sessionKey => $officialAccount->oauth->user()]);
 
             event(new WeChatUserAuthorized(session($sessionKey), true, $account));
 

@@ -4,24 +4,28 @@ namespace App\Listeners;
 
 use App\Models\User\User;
 use App\Models\Wechat\WechatUser;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Overtrue\LaravelWeChat\Events\WeChatUserAuthorized;
 
 class WeChatUserAuthorizedHandleListener
 {
+    private $request;
+
     /**
      * Create the event listener.
      *
-     * @return void
+     * @param Request $request
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
+        $this->request = $request;
     }
 
     /**
      * Handle the event.
      *
+     * @param WeChatUserAuthorized $event
      * @return void
      */
     public function handle(WeChatUserAuthorized $event)
@@ -32,7 +36,7 @@ class WeChatUserAuthorizedHandleListener
             $eventUser = $event->getUser();
             $user = User::create([
                 'name' => $eventUser->getName() ?? $eventUser->getId(),
-                'email' => $eventUser->getId().'@qq.com',
+                'email' => $eventUser->getId() . '@qq.com',
                 'password' => Hash::make($wechatOpenid),
             ]);
             $wechatUser = WechatUser::create([
@@ -43,6 +47,6 @@ class WeChatUserAuthorizedHandleListener
                 'avatar' => $eventUser->getAvatar(),
             ]);
         }
-        Session::put(WechatUser::SESSION_KEY, $wechatUser);
+        $this->request->session()->put(WechatUser::SESSION_KEY, $wechatUser);
     }
 }
