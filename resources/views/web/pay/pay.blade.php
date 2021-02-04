@@ -48,10 +48,24 @@
           </div>
           <input type="hidden" id="pay_way" name="pay_way" value="2">
           <hr class="mb-4">
-          <button class="btn btn-primary btn-lg btn-block" type="submit">
-            支付宝付款{{ is_wechat() ? '(请在第三方浏览器内打开)' : '(支持手机和电脑)' }}</button>
-          <button onclick="toPay()" type="button" class="btn btn-primary btn-lg btn-block">微信支付(支持扫码/二维码识别)
-          </button>
+          @if (is_wechat())
+            <button class="btn btn-primary btn-block" type="submit">
+              支付宝付款(请在第三方浏览器内打开并支付)
+            </button>
+            <button onclick="toPay()" type="button" class="btn btn-primary btn-block">
+              微信支付
+            </button>
+          @else
+            <button class="btn btn-primary btn-block" type="submit">
+              支付宝付款(支持手机和电脑)
+            </button>
+            <button onclick="toPay()" type="button" class="btn btn-primary btn-block">
+              微信支付(支持扫码,微信里打开可直接支付)
+            </button>
+            <a role="button" class="btn btn-primary btn-block copy"
+               data-clipboard-text="{{ request()->fullUrl() }}"
+               href="{{ !is_wechat() ? 'weixin://' : 'javascript:void(0);' }}">复制地址{{ is_wechat() ? '' : '并打开微信' }}</a>
+          @endif
           <input id="qr-alert" type="hidden" data-toggle="modal" data-target="#myModal">
         </form>
       </div>
@@ -62,7 +76,16 @@
   @include('layouts.jquery')
   @include('layouts.bootstrap_js')
   @include('layouts.toastr_js')
+  @include('layouts.clipboard')
   <script type="text/javascript">
+    let wechatPayConfig;
+    let id;
+
+    let clipboard = new ClipboardJS('.copy');
+    clipboard.on('success', function (e) {
+      toastr.info('复制地址成功');
+    });
+
     function toPay() {
       let money = $('#money').val();
       if (money.length === 0) {
@@ -78,11 +101,19 @@
         },
         success(res) {
           if (res.code === 0) {
-            $('#qr-alert').click();
-            $('#qr-img-div').removeClass('d-none');
-            $('#qr-img').attr('src', res.data.img);
-            $('#pay_result').attr('href', '{{ route('web.pay_result') }}' + '?id=' + res.data.id);
-            checkPay(res.data.id);
+            if (res.data.type === 'mp') {
+              wechatPayConfig = res.data.config;
+              id = res.data.id;
+              checkPay(id);
+              callPay();
+            } else {
+              $('#qr-alert').click();
+              $('#qr-img-div').removeClass('d-none');
+              $('#qr-img').attr('src', res.data.img);
+              $('#pay_result').attr('href', '{{ route('web.pay_result') }}' + '?id=' + res.data.id);
+              id = res.data.id;
+              checkPay(id);
+            }
           } else {
             toastr.error(res.msg);
           }
@@ -137,6 +168,34 @@
           return false;
         }
       }, 5000)
+    }
+
+    // 调用微信 JS api 支付
+    function jsApiCall() {
+      WeixinJSBridge.invoke(
+        'getBrandWCPayRequest', wechatPayConfig,
+        function (res) {
+          WeixinJSBridge.log(res.err_msg);
+          if (res.err_msg === 'get_brand_wcpay_request:ok') {
+            checkPay(id);
+          } else {
+            toastr.error('您已取消支付');
+          }
+        }
+      );
+    }
+
+    function callPay() {
+      if (typeof WeixinJSBridge == "undefined") {
+        if (document.addEventListener) {
+          document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+        } else if (document.attachEvent) {
+          document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+          document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+        }
+      } else {
+        jsApiCall();
+      }
     }
   </script>
 @endsection
