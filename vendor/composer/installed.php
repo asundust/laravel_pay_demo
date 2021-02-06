@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '7cc8a99fa90295091c14a6e42915ea8f04eff5c4',
+    'reference' => 'd0f44f2ae3a797745ce166169f221d05ee5019ba',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -288,12 +288,12 @@
     ),
     'facade/ignition' => 
     array (
-      'pretty_version' => '2.5.10',
-      'version' => '2.5.10.0',
+      'pretty_version' => '2.5.11',
+      'version' => '2.5.11.0',
       'aliases' => 
       array (
       ),
-      'reference' => '98154e8b991fb616304c213cd405299ffedc26f5',
+      'reference' => 'e91d67353054bf827c64687fcac5ea44e4dcec54',
     ),
     'facade/ignition-contracts' => 
     array (
@@ -647,7 +647,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '7cc8a99fa90295091c14a6e42915ea8f04eff5c4',
+      'reference' => 'd0f44f2ae3a797745ce166169f221d05ee5019ba',
     ),
     'laravel/tinker' => 
     array (
@@ -702,6 +702,24 @@
       array (
       ),
       'reference' => '3b9dff8aaf7323590c1d2e443db701eb1f9aa0d3',
+    ),
+    'matthiasmullie/minify' => 
+    array (
+      'pretty_version' => '1.3.66',
+      'version' => '1.3.66.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '45fd3b0f1dfa2c965857c6d4a470bea52adc31a6',
+    ),
+    'matthiasmullie/path-converter' => 
+    array (
+      'pretty_version' => '1.1.3',
+      'version' => '1.1.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e7d13b2c7e2f2268e1424aaed02085518afa02d9',
     ),
     'mnabialek/laravel-sql-logger' => 
     array (
