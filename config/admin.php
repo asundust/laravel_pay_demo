@@ -391,5 +391,11 @@ return [
             'name' => 'config',
             'controller' => App\Admin\Controllers\ConfigController::class,
         ],
+        'wechat-work-push' => [
+            'enable' => true,
+            // 'config_table' => 'wechat_work_push_configs', // 自定义配置表表名，可不填写，默认wechat_work_push_configs
+            // 'user_table' => 'wechat_work_push_users', // 自定义用户表表名，可不填写，默认wechat_work_push_users
+            // 'middleware' => 'web', // 自定义中间件组，可不填写，默认web
+        ],
     ],
 ];

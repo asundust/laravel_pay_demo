@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'd0f44f2ae3a797745ce166169f221d05ee5019ba',
+    'reference' => '3ab94f1bd1548751c04867c5eccf3ea910c5c23c',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -52,6 +52,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '0747d9db8023a186db527b16dcf4716878dd746e',
+    ),
+    'asundust/wechat-work-push' => 
+    array (
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7980842c91901c91fc32a544c267482f10c5e556',
     ),
     'bacon/bacon-qr-code' => 
     array (
@@ -671,7 +680,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'd0f44f2ae3a797745ce166169f221d05ee5019ba',
+      'reference' => '3ab94f1bd1548751c04867c5eccf3ea910c5c23c',
     ),
     'laravel/tinker' => 
     array (
@@ -1103,8 +1112,8 @@ private static $installed = array (
     array (
       'provided' => 
       array (
-        0 => '1.0',
-        1 => '1.0.0',
+        0 => '1.0.0',
+        1 => '1.0',
       ),
     ),
     'psr/simple-cache' => 
