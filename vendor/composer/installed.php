@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '3ab94f1bd1548751c04867c5eccf3ea910c5c23c',
+    'reference' => '8a7e3c54a25465ed8bffa0af3f7058cc31cb1b27',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -31,12 +31,12 @@
     ),
     'asundust/wechat-work-push' => 
     array (
-      'pretty_version' => '1.0.0',
-      'version' => '1.0.0.0',
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '7980842c91901c91fc32a544c267482f10c5e556',
+      'reference' => 'ee8bd48c345a0357d033e211e7f75a122b434a52',
     ),
     'bacon/bacon-qr-code' => 
     array (
@@ -656,7 +656,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '3ab94f1bd1548751c04867c5eccf3ea910c5c23c',
+      'reference' => '8a7e3c54a25465ed8bffa0af3f7058cc31cb1b27',
     ),
     'laravel/tinker' => 
     array (

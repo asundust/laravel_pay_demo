@@ -125,16 +125,16 @@
         },
         {
             "name": "asundust/wechat-work-push",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/asundust/wechat-work-push.git",
-                "reference": "7980842c91901c91fc32a544c267482f10c5e556"
+                "reference": "ee8bd48c345a0357d033e211e7f75a122b434a52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/asundust/wechat-work-push/zipball/7980842c91901c91fc32a544c267482f10c5e556",
-                "reference": "7980842c91901c91fc32a544c267482f10c5e556",
+                "url": "https://api.github.com/repos/asundust/wechat-work-push/zipball/ee8bd48c345a0357d033e211e7f75a122b434a52",
+                "reference": "ee8bd48c345a0357d033e211e7f75a122b434a52",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -185,9 +185,9 @@
             ],
             "support": {
                 "issues": "https://github.com/asundust/wechat-work-push/issues",
-                "source": "https://github.com/asundust/wechat-work-push/tree/1.0.0"
+                "source": "https://github.com/asundust/wechat-work-push/tree/1.0.1"
             },
-            "time": "2021-02-10T01:35:22+00:00"
+            "time": "2021-02-11T06:47:39+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",
