@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '8a7e3c54a25465ed8bffa0af3f7058cc31cb1b27',
+    'reference' => '86040fc27b654de065a89fa91b2bef6044be9c0b',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -29,14 +29,23 @@
       ),
       'reference' => '0747d9db8023a186db527b16dcf4716878dd746e',
     ),
-    'asundust/wechat-work-push' => 
+    'asundust/push-laravel' => 
     array (
-      'pretty_version' => '1.0.1',
-      'version' => '1.0.1.0',
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'ee8bd48c345a0357d033e211e7f75a122b434a52',
+      'reference' => 'ff27f26d34f8253df53bd62d29d416c04829ddfe',
+    ),
+    'asundust/wechat-work-push' => 
+    array (
+      'pretty_version' => '1.0.2',
+      'version' => '1.0.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a922ce482e99b7b2443da895fea8f377ceb4559a',
     ),
     'bacon/bacon-qr-code' => 
     array (
@@ -656,7 +665,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '8a7e3c54a25465ed8bffa0af3f7058cc31cb1b27',
+      'reference' => '86040fc27b654de065a89fa91b2bef6044be9c0b',
     ),
     'laravel/tinker' => 
     array (

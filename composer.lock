@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a27d5e517da9df5ec06a2d12d999c453",
+    "content-hash": "b2101a9fc7895321a5fee7bded49b568",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -124,17 +124,85 @@
             "time": "2021-02-03T07:38:22+00:00"
         },
         {
-            "name": "asundust/wechat-work-push",
-            "version": "1.0.1",
+            "name": "asundust/push-laravel",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/asundust/wechat-work-push.git",
-                "reference": "ee8bd48c345a0357d033e211e7f75a122b434a52"
+                "url": "https://github.com/asundust/push-laravel.git",
+                "reference": "ff27f26d34f8253df53bd62d29d416c04829ddfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/asundust/wechat-work-push/zipball/ee8bd48c345a0357d033e211e7f75a122b434a52",
-                "reference": "ee8bd48c345a0357d033e211e7f75a122b434a52",
+                "url": "https://api.github.com/repos/asundust/push-laravel/zipball/ff27f26d34f8253df53bd62d29d416c04829ddfe",
+                "reference": "ff27f26d34f8253df53bd62d29d416c04829ddfe",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3.1|^7.0.1",
+                "illuminate/support": "~6|~7|~8"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Asundust\\PushLaravel\\PushLaravelServiceProvider"
+                    ],
+                    "aliases": {
+                        "PushLaravel": "Asundust\\PushLaravel\\Facades\\PushLaravel"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Asundust\\PushLaravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "asundust",
+                    "email": "asundust@qq.com",
+                    "homepage": "https://github.com/asundust"
+                }
+            ],
+            "description": "asundust/wechat-work-push的Laravel客户端",
+            "homepage": "https://github.com/asundust/push-laravel",
+            "keywords": [
+                "client",
+                "extension",
+                "laravel",
+                "laravel-admin",
+                "push",
+                "wechat",
+                "work"
+            ],
+            "support": {
+                "issues": "https://github.com/asundust/push-laravel/issues",
+                "source": "https://github.com/asundust/push-laravel/tree/1.0.0"
+            },
+            "time": "2021-02-14T05:50:20+00:00"
+        },
+        {
+            "name": "asundust/wechat-work-push",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/asundust/wechat-work-push.git",
+                "reference": "a922ce482e99b7b2443da895fea8f377ceb4559a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/asundust/wechat-work-push/zipball/a922ce482e99b7b2443da895fea8f377ceb4559a",
+                "reference": "a922ce482e99b7b2443da895fea8f377ceb4559a",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -185,9 +253,9 @@
             ],
             "support": {
                 "issues": "https://github.com/asundust/wechat-work-push/issues",
-                "source": "https://github.com/asundust/wechat-work-push/tree/1.0.1"
+                "source": "https://github.com/asundust/wechat-work-push/tree/1.0.2"
             },
-            "time": "2021-02-11T06:47:39+00:00"
+            "time": "2021-02-14T04:51:31+00:00"
         },
         {
             "name": "bacon/bacon-qr-code",

@@ -230,6 +230,7 @@ class ComposerStaticInit22f8a4252914ab0e2bafd18617da024a
         'A' => 
         array (
             'Asundust\\WechatWorkPush\\' => 24,
+            'Asundust\\PushLaravel\\' => 21,
             'Asm89\\Stack\\' => 12,
             'App\\' => 4,
         ),
@@ -718,6 +719,10 @@ class ComposerStaticInit22f8a4252914ab0e2bafd18617da024a
         array (
             0 => __DIR__ . '/..' . '/asundust/wechat-work-push/src',
         ),
+        'Asundust\\PushLaravel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/asundust/push-laravel/src',
+        ),
         'Asm89\\Stack\\' => 
         array (
             0 => __DIR__ . '/..' . '/asm89/stack-cors/src',
@@ -814,6 +819,10 @@ class ComposerStaticInit22f8a4252914ab0e2bafd18617da024a
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',
+        'Asundust\\PushLaravel\\Facades\\PushLaravel' => __DIR__ . '/..' . '/asundust/push-laravel/src/Facades/PushLaravel.php',
+        'Asundust\\PushLaravel\\PushLaravel' => __DIR__ . '/..' . '/asundust/push-laravel/src/PushLaravel.php',
+        'Asundust\\PushLaravel\\PushLaravelException' => __DIR__ . '/..' . '/asundust/push-laravel/src/PushLaravelException.php',
+        'Asundust\\PushLaravel\\PushLaravelServiceProvider' => __DIR__ . '/..' . '/asundust/push-laravel/src/PushLaravelServiceProvider.php',
         'Asundust\\WechatWorkPush\\Http\\Actions\\SendTestMessage' => __DIR__ . '/..' . '/asundust/wechat-work-push/src/Http/Actions/SendTestMessage.php',
         'Asundust\\WechatWorkPush\\Http\\Controllers\\WechatWorkPushConfigController' => __DIR__ . '/..' . '/asundust/wechat-work-push/src/Http/Controllers/WechatWorkPushConfigController.php',
         'Asundust\\WechatWorkPush\\Http\\Controllers\\WechatWorkPushHandleController' => __DIR__ . '/..' . '/asundust/wechat-work-push/src/Http/Controllers/WechatWorkPushHandleController.php',
