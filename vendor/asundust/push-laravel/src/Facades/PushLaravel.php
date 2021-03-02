@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * Class PushLaravel.
  *
- * @method static \Asundust\PushLaravel\PushLaravel send($title, $content = '')
+ * @method static \Asundust\PushLaravel\PushLaravel send(string $title, ?string $content = null, ?string $url = null, ?string $urlTitle = null)
  */
 class PushLaravel extends Facade
 {

@@ -39,13 +39,16 @@ PUSH_SECRET=
 
 $title = '我是测试标题';
 $content = '我是测试内容';
+$url = 'https://www.baidu.com/';
+$urlTitle = '我是链接';
 
+// 其中 $content $url $urlTitle 可不传
 // 默认配置
-app('push-laravel')->send($title, $content);
+app('push-laravel')->send($title, $content, $url, $urlTitle);
 // 指定配置
-app('push-laravel.xxxxxx')->send($title, $content);
+app('push-laravel.xxxxxx')->send($title, $content, $url, $urlTitle);
 // 默认配置
-PushLaravel::send($title, $content);
+PushLaravel::send($title, $content, $url, $urlTitle);
 // 指定配置
-PushLaravel::config('xxxxxx')->send($title, $content);
+PushLaravel::config('xxxxxx')->send($title, $content, $url, $urlTitle);
 ```

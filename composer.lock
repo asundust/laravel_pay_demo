@@ -125,16 +125,16 @@
         },
         {
             "name": "asundust/push-laravel",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/asundust/push-laravel.git",
-                "reference": "ff27f26d34f8253df53bd62d29d416c04829ddfe"
+                "reference": "82b1fed6621c4445a71bfc75f0e088f56e601bed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/asundust/push-laravel/zipball/ff27f26d34f8253df53bd62d29d416c04829ddfe",
-                "reference": "ff27f26d34f8253df53bd62d29d416c04829ddfe",
+                "url": "https://api.github.com/repos/asundust/push-laravel/zipball/82b1fed6621c4445a71bfc75f0e088f56e601bed",
+                "reference": "82b1fed6621c4445a71bfc75f0e088f56e601bed",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -178,18 +178,16 @@
             "homepage": "https://github.com/asundust/push-laravel",
             "keywords": [
                 "client",
-                "extension",
                 "laravel",
-                "laravel-admin",
                 "push",
                 "wechat",
                 "work"
             ],
             "support": {
                 "issues": "https://github.com/asundust/push-laravel/issues",
-                "source": "https://github.com/asundust/push-laravel/tree/1.0.0"
+                "source": "https://github.com/asundust/push-laravel/tree/1.0.1"
             },
-            "time": "2021-02-14T05:50:20+00:00"
+            "time": "2021-03-02T13:21:16+00:00"
         },
         {
             "name": "asundust/wechat-work-push",

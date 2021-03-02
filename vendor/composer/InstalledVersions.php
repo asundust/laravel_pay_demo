@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '532647f08058c559e03fd07d36bd5b667d84a624',
+    'reference' => '04aa8d02336fe481cde528c713bc4ba24cce4027',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -55,12 +55,12 @@ private static $installed = array (
     ),
     'asundust/push-laravel' => 
     array (
-      'pretty_version' => '1.0.0',
-      'version' => '1.0.0.0',
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'ff27f26d34f8253df53bd62d29d416c04829ddfe',
+      'reference' => '82b1fed6621c4445a71bfc75f0e088f56e601bed',
     ),
     'asundust/wechat-work-push' => 
     array (
@@ -689,7 +689,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '532647f08058c559e03fd07d36bd5b667d84a624',
+      'reference' => '04aa8d02336fe481cde528c713bc4ba24cce4027',
     ),
     'laravel/tinker' => 
     array (
