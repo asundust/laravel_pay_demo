@@ -166,7 +166,7 @@ class AlipayService
     /**
      * 发起退款请求
      *
-     * @param array $data => ['refund_amount' => '金额', 'pay_no' => '商户单号', 'pay_service_no' => '支付宝订单号', 'refund_no' => '退款单号'] | pay_no 和 pay_service_no 不能同时为空 | refund_no 部分退款时不能为空
+     * @param array $data    => ['refund_amount' => '金额', 'pay_no' => '商户单号', 'pay_service_no' => '支付宝订单号', 'refund_no' => '退款单号'] | pay_no 和 pay_service_no 不能同时为空 | refund_no 部分退款时不能为空
      * @param array $extData
      *
      * @return mixed
