@@ -2,14 +2,24 @@ Laravel-Admin 消息推送插件 by 企业微信应用消息
 ======
 > 无需公众号，不需要安装企业微信客户端，低成本推送消息解决方案
 
+![StyleCI build status](https://github.styleci.io/repos/337583331/shield)
+
+<a href="https://packagist.org/packages/asundust/wechat-work-push"><img src="https://img.shields.io/packagist/dt/asundust/wechat-work-push" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/asundust/wechat-work-push"><img src="https://img.shields.io/packagist/v/asundust/wechat-work-push" alt="Latest Stable Version"></a>
+
 ## 前言
 
 灵感启发Server酱，这边只是一个简单的实现。
+
+## 客户端支持
+
+- Laravel版 [https://github.com/asundust/push-laravel](https://github.com/asundust/push-laravel)
 
 ## 功能介绍
 
 目前版本支持灵活设置
 
+- 支持入参标题、内容、链接、链接标题
 - 一个【企业微信应用】的消息可推送【单个账号/全部人员】）
 - 【单个账号/全部人员】可设置独立的【企业微信应用】配置
 
@@ -20,7 +30,9 @@ Laravel-Admin 消息推送插件 by 企业微信应用消息
 
 ## 截图
 
-- todo
+- 能直接在通知里看到消息内容
+
+![通知效果](https://user-images.githubusercontent.com/6573979/107605606-a4adfb80-6c6e-11eb-9f71-66309bc41c1e.png)
 
 ## 安装
 
@@ -73,28 +85,50 @@ php artisan admin:import wechat-work-push
 
 - 申请企业微信[https://work.weixin.qq.com/](https://work.weixin.qq.com/)
 
+![申请企业微信](https://user-images.githubusercontent.com/6573979/107605784-230a9d80-6c6f-11eb-87b0-b5ca2119ca2f.png)
+
 - 注册成功后，点【管理企业】进入管理界面，选择【应用管理】-【自建】-【创建应用】。
 
+![创建应用](https://user-images.githubusercontent.com/6573979/107605802-3453aa00-6c6f-11eb-94de-97b5044bd09d.png)
+
 - 应用名称自行想一个，图片Logo自行上传一个，可见范围选择公司名。
+
+![填写信息](https://user-images.githubusercontent.com/6573979/107605804-3584d700-6c6f-11eb-9238-ec9e16985334.png)
 
 - 创建好后复制【AgentId】和【Secret】出来到网站后台的【企业微信应用消息】-【默认配置】填写对应的那一栏上。
 
 - 进入【我的企业】页面，拉到最下边，可以看到企业ID，复制并填到对应那一栏上，记得保存。
 
+![企业ID](https://user-images.githubusercontent.com/6573979/107605805-3584d700-6c6f-11eb-8a30-cabfc306ea33.png)
+
 - 如果是用户自定义企业记得是编辑用户填入对应的三栏里。
 
-- 进入【我的企业】-【微信插件】，拉到下边扫描二维码，关注以后即可收到推送的消息（可能需要先下载一次企业微信绑定一下微信）。
+- 在列表可以发送测试消息，如果企业微信接收到了消息就成功了。
 
-- 在列表可以发送测试消息，如果微信接收到了就成功了。
+- 进入【我的企业】-【微信插件】，拉到下边扫描二维码，关注以后即可收到推送的消息（可能需要先下载一次企业微信绑定一下微信），此时企业微信和微信应该能同时收到消息。
 
-- 如果遇到问题的话可以到刚刚创建的应用里发个测试消息（选择【应用管理】-【自建】-【应用名称】-【功能】-【发送消息】）。
+![二维码](https://user-images.githubusercontent.com/6573979/107605807-361d6d80-6c6f-11eb-9f97-96da63a5741a.png)
+
+> 设置企业微信不接收消息，微信接收消息。
+>
+> 【企业微信】-【我】-【设置】-【新消息通知】-【仅在企业微信中接收消息】-【应用消息】关闭
+>
+> 如果有多个企业身份，【企业微信】-【我】-【设置】-【新消息通知】-【其他企业消息提醒】-选择神申请的企业名字改成【仅接收特别提醒的消息】或者【不提醒】-然后切换回自己常用的企业消息。
+>
+> 然后去发送测试通知，应该没什么问题。
+>
+> 这边关于消息通知的设置教程有误，如有问题请联系我。
+
+> 如果遇到问题的话可以到刚刚创建的应用里发个测试消息（选择【应用管理】-【自建】-【应用名称】-【功能】-【发送消息】）。
 
 ## 使用
 
 - 默认路由支持`get`和`post`，记得在`VerifyCsrfToken`里的`except`添加`push/*`，以便支持`post`接口请求。
 
-- 接口地址为`http://{www.abc.com}/push/{推送密钥}`，标题为`title`不可控，内容为`content`可不传。 示例：`get`
-  地址为`http://{www.abc.com}/push/secretSecret?title=测试标题&content=测试内容`
+- 接口地址为`http://{www.abc.com}/push/{推送密钥}`，标题为`title`不可空，内容为`content`可不传，链接为`url`可不传，链接标题为`url_title`可不传。 示例：`get`
+  地址为`http://{www.abc.com}/push/secretSecret?title=测试标题&content=测试内容&url=https://www.baidu.com&url_title=我是百度的测试链接`
+
+- 传入不合法的`url`可能会导致发送请求超时，不知为何，建议自行测试。
 
 ## 内部调用支持
 

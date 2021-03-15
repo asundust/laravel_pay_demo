@@ -126,6 +126,7 @@ return array(
     'Barryvdh\\LaravelIdeHelper\\' => array($vendorDir . '/barryvdh/laravel-ide-helper/src'),
     'BaconQrCode\\' => array($vendorDir . '/bacon/bacon-qr-code/src'),
     'Asundust\\WechatWorkPush\\' => array($vendorDir . '/asundust/wechat-work-push/src'),
+    'Asundust\\PushLaravel\\' => array($vendorDir . '/asundust/push-laravel/src'),
     'Asm89\\Stack\\' => array($vendorDir . '/asm89/stack-cors/src'),
     'App\\' => array($baseDir . '/app'),
 );

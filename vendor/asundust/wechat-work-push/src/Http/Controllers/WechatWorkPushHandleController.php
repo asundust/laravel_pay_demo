@@ -13,9 +13,8 @@ class WechatWorkPushHandleController extends Controller
     use SendMessageTrait;
 
     /**
-     * @param         $secret
-     * @param Request $request
-     * @return array
+     * @param $secret
+     *
      * @throws \EasyWeChat\Kernel\Exceptions\InvalidArgumentException
      * @throws \EasyWeChat\Kernel\Exceptions\RuntimeException
      */
@@ -23,6 +22,8 @@ class WechatWorkPushHandleController extends Controller
     {
         $title = $request->input('title');
         $content = $request->input('content');
+        $url = $request->input('url');
+        $urlTitle = $request->input('url_title');
         if (!$title) {
             return ['code' => 1, 'message' => '消息标题为空'];
         }
@@ -49,9 +50,10 @@ class WechatWorkPushHandleController extends Controller
                     'secret' => $config->secret,
                 ];
             }
-            $result = $this->send($config, $user->name, $title, $content);
-            return ['code' => 0, 'message' => 'success', 'data' => $result];
+
+            return $this->send($config, $user->name, $title, $content, $url, $urlTitle);
         }
+
         return ['code' => 1, 'message' => 'secret验证失败'];
     }
 }
