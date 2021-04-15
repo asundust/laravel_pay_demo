@@ -11,6 +11,7 @@ Route::group([
     'as' => config('admin.route.prefix').'.',
 ], function (Router $router) {
     $router->get('/', 'HomeController@index')->name('admin.home');
+    $router->get('config/refresh', 'ConfigController@refresh')->name('admin.config.refresh'); // 刷新配置缓存
     // 示例订单
     $router->resource('orders', 'DemoOrderController');
 });

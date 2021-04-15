@@ -29,9 +29,9 @@ if (!function_exists('pl')) {
             $path = $name;
         }
         config([
-            'logging.channels.'.$path.'_'.$name => [
+            'logging.channels.' . $path . '_' . $name => [
                 'driver' => 'daily',
-                'path' => storage_path('logs/'.$path.'/'.$name.'.log'),
+                'path' => storage_path('logs/' . $path . '/' . $name . '.log'),
                 'level' => 'debug',
                 'days' => $max,
             ],
@@ -45,10 +45,10 @@ if (!function_exists('pl')) {
             }
         }
         if (!is_array($message)) {
-            logger()->channel($path.'_'.$name)->info($type.PHP_EOL.$message);
+            logger()->channel($path . '_' . $name)->info($type . PHP_EOL . $message);
         } else {
-            logger()->channel($path.'_'.$name)->info($type);
-            logger()->channel($path.'_'.$name)->info($message);
+            logger()->channel($path . '_' . $name)->info($type);
+            logger()->channel($path . '_' . $name)->info($message);
         }
     }
 }
@@ -102,7 +102,7 @@ if (!function_exists('sc_send')) {
     function sc_send($text, $desc = '', $key = '')
     {
         if (!$key) {
-            $key = config('sc_send_key');
+            $key = cache_config('sc_send_key');
         }
         if (!$key) {
             return false;
@@ -115,7 +115,7 @@ if (!function_exists('sc_send')) {
             'headers' => [
                 'Content-Type' => 'application/x-www-form-urlencoded',
             ],
-        ]))->post('https://sc.ftqq.com/'.$key.'.send', [
+        ]))->post('https://sc.ftqq.com/' . $key . '.send', [
             'form_params' => [
                 'text' => $text,
                 'desp' => $desc,
@@ -123,6 +123,20 @@ if (!function_exists('sc_send')) {
         ]);
 
         return json_decode($response->getBody()->getContents(), true);
+    }
+}
+
+if (!function_exists('cache_config')) {
+    /**
+     * 获取Admin Config的缓存键的值
+     *
+     * @param $key
+     *
+     * @return mixed
+     */
+    function cache_config($key)
+    {
+        return \Illuminate\Support\Facades\Cache::get(\App\Models\Admin\AdminConfig::CACHE_KEY_PREFIX . $key);
     }
 }
 
