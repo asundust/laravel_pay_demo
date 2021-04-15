@@ -27,7 +27,7 @@ class AdminConfig extends ConfigModel
     const CACHE_TTL = 864000;
 
     /**
-     * ÅäÖÃ»º´æ²Ù×÷.
+     * é…ç½®ç¼“å­˜æ“ä½œ.
      */
     public static function configLoad()
     {
