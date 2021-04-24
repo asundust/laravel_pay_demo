@@ -42,8 +42,8 @@
           {{ csrf_field() }}
           <div class="row">
             <div class="col-md-12 mb-3">
-              <label for="money">请输入金额</label>
-              <input type="text" class="form-control" name="money" id="money"/>
+              <label for="money">请输入金额<span class="small">（用于测试的金额支付成功后，稍后会进行退款）</span></label>
+              <input type="text" class="form-control" name="money" id="money" value="0.01"/>
             </div>
           </div>
           <input type="hidden" id="pay_way" name="pay_way" value="2">
