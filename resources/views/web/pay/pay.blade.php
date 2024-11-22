@@ -42,7 +42,7 @@
           {{ csrf_field() }}
           <div class="row">
             <div class="col-md-12 mb-3">
-              <label for="money">请输入金额<span class="small">（用于测试的金额支付成功后，稍后会进行退款，如若未维护退款，请联系微信asundust。【项目久远，未及时更新，目前未有更新计划，请查看母项目更新<em><a class="text-info" href="https://github.com/asundust/laravel_new">https://github.com/asundust/laravel_new</a></em>】）</span></label>
+              <label for="money">请输入金额<span class="small">（用于测试的金额支付成功后，稍后会进行退款，如若未及时退款，请联系微信asundust。【项目久远，因大版本变更过快导致未及时更新，目前未有更新计划，请直接查看母项目更新：<em><a class="text-info" href="https://github.com/asundust/laravel_new">https://github.com/asundust/laravel_new</a></em>】）</span></label>
               <input type="text" class="form-control" name="money" id="money" value="0.01"/>
             </div>
           </div>
