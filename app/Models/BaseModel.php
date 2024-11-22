@@ -20,7 +20,7 @@ class BaseModel extends Model
 
     protected $guarded = [];
 
-    const STATUS = [
+    public const STATUS = [
         0 => '无效',
         1 => '有效',
     ];

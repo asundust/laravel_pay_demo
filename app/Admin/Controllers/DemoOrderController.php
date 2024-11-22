@@ -39,7 +39,7 @@ class DemoOrderController extends AdminController
         $grid->column('billed.pay_service_no', '商户流水号');
         $grid->column('title', '订单标题');
         $grid->column('price', '订单金额')->display(function () {
-            return '￥'.money_show($this->price);
+            return '￥' . money_show($this->price);
         });
         $grid->column('pay_way_name', '支付方式')->display(function () {
             return $this->bill->pay_way_name ?? '';
@@ -51,10 +51,10 @@ class DemoOrderController extends AdminController
         $grid->column('pay_info', '支付信息')->display(function () {
             $str = '';
             if ($this->billed) {
-                $str .= '已付￥'.money_show($this->payed_amount);
+                $str .= '已付￥' . money_show($this->payed_amount);
             }
             if ($this->refunded_amount > 0 || $this->refunding_amount > 0) {
-                $str .= '/已退￥'.money_show($this->refunded_amount).'/在退￥'.money_show($this->refunding_amount);
+                $str .= '/已退￥' . money_show($this->refunded_amount) . '/在退￥' . money_show($this->refunding_amount);
             }
 
             return $str;

@@ -9,7 +9,7 @@ class TestController extends Controller
 {
     use WechatTrait;
 
-    const ALLOW_LISTS = [
+    public const ALLOW_LISTS = [
         'wechatOauthTest',
     ];
 
@@ -32,13 +32,13 @@ class TestController extends Controller
         if (!empty($result)) {
             return $result;
         }
-        dd('结束运行方法：'.$fun);
+        dd('结束运行方法：' . $fun);
     }
 
     public function wechatOauthTest()
     {
         $wechatUser = $this->getWechatUser();
-        mad('授权成功，您的用户id为：'.$wechatUser->user_id.' ，您的openid为：'.$wechatUser->wechat_openid);
+        mad('授权成功，您的用户id为：' . $wechatUser->user_id . ' ，您的openid为：' . $wechatUser->wechat_openid);
     }
 
     // public function a()

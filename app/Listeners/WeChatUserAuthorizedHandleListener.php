@@ -22,7 +22,7 @@ class WeChatUserAuthorizedHandleListener
             $eventUser = $event->getUser();
             $user = User::create([
                 'name' => $eventUser->getName() ?? $eventUser->getId(),
-                'email' => $eventUser->getId().'@qq.com',
+                'email' => $eventUser->getId() . '@qq.com',
                 'password' => Hash::make($wechatOpenid),
             ]);
             $wechatUser = WechatUser::create([

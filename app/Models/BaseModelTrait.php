@@ -12,7 +12,7 @@ trait BaseModelTrait
      */
     public static function getNewNumber($model = '', $fieldName = 'number'): string
     {
-        $number = now()->format('ymdHis').rand(10000, 99999);
+        $number = now()->format('ymdHis') . rand(10000, 99999);
         if (empty($model)) {
             if (self::findNumber($number, '', $fieldName)) {
                 return self::getNewNumber();

@@ -40,14 +40,14 @@ class DemoOrder extends BaseModel
     use BaseModelTrait;
     use SendMessageTrait;
 
-    const STATUS = [
+    public const STATUS = [
         0 => '未支付',
         1 => '已支付',
         2 => '部分退款',
         3 => '全额退款',
     ];
 
-    const STATUS_LABEL = [
+    public const STATUS_LABEL = [
         0 => 'default',
         1 => 'success',
         2 => 'warning',
@@ -122,13 +122,13 @@ class DemoOrder extends BaseModel
      */
     public function handlePied(MultiBill $bill)
     {
-        Cache::put('DemoOrder'.$this->id, 1, 600);
+        Cache::put('DemoOrder' . $this->id, 1, 600);
         $this->update([
             'pay_at' => $bill->pay_at,
             'status' => 1,
         ]);
         // 发送消息
-        $this->sendMessage(config('app.name').$bill->pay_way_string.'有一笔新的收款'.money_show($this->payed_amount).'元', $bill->pay_way_string.'于 '.$bill->pay_at.' 收款：￥'.money_show($this->payed_amount));
+        $this->sendMessage(config('app.name') . $bill->pay_way_string . '有一笔新的收款' . money_show($this->payed_amount) . '元', $bill->pay_way_string . '于 ' . $bill->pay_at . ' 收款：￥' . money_show($this->payed_amount));
     }
 
     /**

@@ -99,7 +99,7 @@ class WechatPayService
 
             return '';
         } catch (Exception $e) {
-            pl('微信回调失败：'.$e->getMessage(), 'wechat-notify', 'pay');
+            pl('微信回调失败：' . $e->getMessage(), 'wechat-notify', 'pay');
             DB::rollBack();
 
             return '';
@@ -203,7 +203,7 @@ class WechatPayService
 
             return '';
         } catch (Exception $e) {
-            pl('微信回调失败：'.$e->getMessage(), 'wechat-notify-refund', 'pay');
+            pl('微信回调失败：' . $e->getMessage(), 'wechat-notify-refund', 'pay');
             DB::rollBack();
 
             return '';

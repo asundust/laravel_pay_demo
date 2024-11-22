@@ -54,22 +54,22 @@ class MultiBill extends BaseModel
     use BaseModelTrait;
 
     // 支付方式
-    const PAY_WAY = [
+    public const PAY_WAY = [
         1 => '微信',
         2 => '支付宝',
     ];
 
-    const PAY_WAY_ALIAS = [
+    public const PAY_WAY_ALIAS = [
         1 => 'wechat',
         2 => 'alipay',
     ];
 
-    const BILL_STATUS = [
+    public const BILL_STATUS = [
         0 => '未支付成功过',
         1 => '支付成功过',
     ];
 
-    const PAY_STATUS = [
+    public const PAY_STATUS = [
         1 => '未支付',
         2 => '付款成功',
         3 => '付款失败',
@@ -157,7 +157,7 @@ class MultiBill extends BaseModel
         /* @var self $bill */
         $bill = self::where('pay_no', $data->pay_no)->where('pay_way', $payWay)->first();
         if (!$bill) {
-            pl('找不到支付订单信息：'.$data->pay_no, $bill->pay_way_alias.'-notify', 'pay');
+            pl('找不到支付订单信息：' . $data->pay_no, $bill->pay_way_alias . '-notify', 'pay');
 
             return true;
         }
@@ -168,12 +168,12 @@ class MultiBill extends BaseModel
                 // todo
                 return true;
             }
-            pl('订单状态非未支付：'.$data->pay_no.'，订单状态：'.$bill->pay_status_string, $bill->pay_way_alias.'-notify-comment', 'pay');
+            pl('订单状态非未支付：' . $data->pay_no . '，订单状态：' . $bill->pay_status_string, $bill->pay_way_alias . '-notify-comment', 'pay');
 
             return true;
         }
         if ($bill->pay_amount != $data->pay_amount) {
-            pl('订单支付金额不一致：'.$data->pay_no.'，订单金额：'.$bill->pay_amount.'，回调金额：'.$data->amount, $bill->pay_way_alias.'-notify-comment', 'pay');
+            pl('订单支付金额不一致：' . $data->pay_no . '，订单金额：' . $bill->pay_amount . '，回调金额：' . $data->amount, $bill->pay_way_alias . '-notify-comment', 'pay');
 
             return false;
         }
@@ -210,7 +210,7 @@ class MultiBill extends BaseModel
             return $bill->billable->payResult();
         }
 
-        return $bill->pay_status_string.':)';
+        return $bill->pay_status_string . ':)';
     }
 
     /**
@@ -422,7 +422,7 @@ class MultiBill extends BaseModel
                     break;
             }
         } catch (Exception $e) {
-            pl($this->pay_way_string.'支付订单'.$this->pay_no.'支付检查失败：'.$e->getMessage(), $this->pay_way_alias.'-pay-find-err', 'pay');
+            pl($this->pay_way_string . '支付订单' . $this->pay_no . '支付检查失败：' . $e->getMessage(), $this->pay_way_alias . '-pay-find-err', 'pay');
             DB::rollBack();
 
             return ['code' => 1, 'msg' => '订单支付失败'];

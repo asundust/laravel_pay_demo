@@ -25,7 +25,7 @@ use Illuminate\Support\Carbon;
  */
 class MultiRefundBill extends BaseModel
 {
-    const REFUND_STATUS = [
+    public const REFUND_STATUS = [
         1 => '未支付',
         2 => '付款成功',
         3 => '付款失败',
@@ -61,7 +61,7 @@ class MultiRefundBill extends BaseModel
     {
         $refundBill = self::where('refund_no', $data->refund_no)->first();
         if (!$refundBill) {
-            pl('找不到退款订单信息：'.$data->refund_no, 'wechat'.'-notify', 'pay');
+            pl('找不到退款订单信息：' . $data->refund_no, 'wechat' . '-notify', 'pay');
 
             return true;
         }
@@ -71,7 +71,7 @@ class MultiRefundBill extends BaseModel
         //     return true;
         // }
         if ($refundBill->refund_amount != $data->refund_amount) {
-            pl('退款订单金额不一致：'.$data->refund_no.'，订单金额：'.$refundBill->refund_no.'，回调金额：'.$data->refund_no, 'wechat'.'-notify', 'pay');
+            pl('退款订单金额不一致：' . $data->refund_no . '，订单金额：' . $refundBill->refund_no . '，回调金额：' . $data->refund_no, 'wechat' . '-notify', 'pay');
 
             return false;
         }
